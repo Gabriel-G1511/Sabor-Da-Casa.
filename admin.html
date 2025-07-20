@@ -1,64 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sabor da Casa - Administração</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Sabor da Casa</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>🔐 Administração - Sabor da Casa</h1>
-    </header>
-
-    <main>
-      <div id="loginForm" class="login-form">
-        <h3>Login Administrativo</h3>
-        <div class="form-group">
-          <label>Senha:</label>
-          <input type="password" id="senhaAdmin" placeholder="Digite a senha" />
-        </div>
-        <button id="btnEntrarAdmin" class="btn-primary">Entrar</button>
-        <div id="erroLogin" class="erro" style="display: none;">Senha incorreta!</div>
-      </div>
-
-      <div id="adminPanel" class="admin-panel" style="display: none;">
-        <h3>Gerenciar Cardápio do Dia</h3>
-
-        <div class="cardapio-admin">
-          <h4>Cadastrar Nova Marmita</h4>
-          <div class="form-group">
-            <label>Nome da Marmita:</label>
-            <input type="text" id="nomeMarmita" placeholder="Ex: Frango Grelhado com Legumes" />
-          </div>
-          <div class="form-group">
-            <label>Descrição:</label>
-            <textarea id="descricaoMarmita" placeholder="Descreva os ingredientes e acompanhamentos..."></textarea>
-          </div>
-          <div class="precos-group">
-            <div class="form-group">
-              <label>Preço Média (R$):</label>
-              <input type="number" id="precoMedia" step="0.01" placeholder="0.00" />
+    <div class="admin-container">
+        <div id="loginForm" class="login-section">
+            <div class="login-card">
+                <div class="login-header">
+                    <i class="fas fa-lock"></i>
+                    <h2>Área Administrativa</h2>
+                </div>
+                
+                <div class="login-form">
+                    <div class="form-group">
+                        <label>Senha de Acesso:</label>
+                        <input type="password" id="senhaAdmin" placeholder="Digite a senha">
+                    </div>
+                    <button onclick="fazerLogin()" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i> Entrar
+                    </button>
+                    <div id="erroLogin" class="error-msg" style="display: none;">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Senha incorreta!
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-              <label>Preço Grande (R$):</label>
-              <input type="number" id="precoGrande" step="0.01" placeholder="0.00" />
+        </div>
+
+        <div id="adminPanel" class="admin-panel" style="display: none;">
+            <div class="admin-header">
+                <h1><i class="fas fa-utensils"></i> Gerenciar Cardápio</h1>
+                <button onclick="logout()" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </button>
             </div>
-          </div>
-          <button id="btnAdicionarMarmita" class="btn-primary">Adicionar ao Cardápio</button>
+
+            <div class="admin-content">
+                <div class="add-marmita-section">
+                    <h2><i class="fas fa-plus-circle"></i> Adicionar Nova Marmita</h2>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nome da Marmita:</label>
+                            <input type="text" id="nomeMarmita" placeholder="Ex: Frango Grelhado com Legumes">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Descrição:</label>
+                            <textarea id="descricaoMarmita" placeholder="Descreva os ingredientes e acompanhamentos..."></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Ingredientes (separados por vírgula):</label>
+                            <input type="text" id="ingredientesMarmita" placeholder="Ex: arroz, feijão, frango, batata, salada">
+                        </div>
+                    </div>
+
+                    <button onclick="adicionarMarmita()" class="add-btn">
+                        <i class="fas fa-plus"></i> Adicionar ao Cardápio
+                    </button>
+                </div>
+
+                <div class="current-menu-section">
+                    <h2><i class="fas fa-list"></i> Cardápio Atual</h2>
+                    <div id="listaCardapio" class="cardapio-admin-list">
+                        <!-- Lista será carregada aqui -->
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="cardapio-atual">
-          <h4>Cardápio Atual</h4>
-          <div id="listaCardapio"></div>
-        </div>
-
-        <button id="btnSairAdmin" class="btn-secondary" style="margin-top: 15px;">Sair</button>
-      </div>
-    </main>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

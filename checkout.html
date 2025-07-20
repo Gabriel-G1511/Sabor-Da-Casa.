@@ -1,52 +1,150 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sabor da Casa - Finalizar Pedido</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Pedido - Sabor da Casa</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>🍽️ Sabor da Casa</h1>
-      <p>Finalizar Pedido</p>
-    </header>
+    <div class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-utensils"></i>
+                <h1>Sabor da Casa</h1>
+            </div>
+            <button class="back-btn" onclick="voltarMenu()">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </button>
+        </div>
+    </div>
 
-    <main>
-      <div id="resumoPedido" class="resumo-pedido">
-        <!-- Resumo do pedido será carregado aqui -->
-      </div>
+    <div class="main-content">
+        <div class="container">
+            <div class="checkout-wrapper">
+                <div class="checkout-form">
+                    <div class="section">
+                        <h2><i class="fas fa-user"></i> Seus Dados</h2>
+                        
+                        <div class="form-group">
+                            <label>Nome Completo *</label>
+                            <input type="text" id="nome" required>
+                        </div>
 
-      <div class="dados-cliente">
-        <h3>Seus Dados</h3>
-        <div class="form-group">
-          <label>Nome Completo:</label>
-          <input type="text" id="nome" required />
-        </div>
-        <div class="form-group">
-          <label>Telefone:</label>
-          <input type="tel" id="telefone" placeholder="(00) 00000-0000" />
-        </div>
-        <div class="form-group">
-          <label>Endereço Completo:</label>
-          <textarea id="endereco" placeholder="Rua, número, bairro, cidade..." required></textarea>
-        </div>
-        <div class="form-group">
-          <label>Ponto de Referência (opcional):</label>
-          <input type="text" id="referencia" placeholder="Ex: próximo ao mercado..." />
-        </div>
-        <div class="form-group">
-          <label>Observações Extras:</label>
-          <textarea id="obsExtra" placeholder="Como prefere ser contatado, horário de entrega, etc..."></textarea>
-        </div>
+                        <div class="form-group">
+                            <label>Telefone *</label>
+                            <input type="tel" id="telefone" placeholder="(48) 99999-9999" required>
+                        </div>
+                    </div>
 
-        <button id="btnEnviarPedido" class="btn-primary">Enviar Pedido via WhatsApp</button>
-        <button id="btnVoltar" class="btn-secondary" style="margin-top:10px;">Voltar ao Cardápio</button>
-      </div>
-    </main>
-  </div>
+                    <div class="section">
+                        <h2><i class="fas fa-map-marker-alt"></i> Endereço de Entrega</h2>
+                        
+                        <div class="form-group">
+                            <label>Rua/Avenida *</label>
+                            <input type="text" id="rua" required>
+                        </div>
 
-  <script src="script.js"></script>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Número</label>
+                                <input type="text" id="numero">
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="semNumero" onchange="toggleSemNumero()">
+                                    Sem número
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="obsEnderecoGroup" style="display: none;">
+                            <label>Observação do Endereço *</label>
+                            <input type="text" id="obsEndereco" placeholder="Ex: Casa azul, portão branco...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Complemento</label>
+                            <input type="text" id="complemento" placeholder="Apartamento, bloco, etc...">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Bairro *</label>
+                            <input type="text" id="bairro" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ponto de Referência</label>
+                            <input type="text" id="referencia" placeholder="Ex: Próximo ao mercado...">
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2><i class="fas fa-credit-card"></i> Forma de Pagamento</h2>
+                        
+                        <div class="payment-options">
+                            <label class="payment-option">
+                                <input type="radio" name="pagamento" value="dinheiro">
+                                <span><i class="fas fa-money-bill-wave"></i> Dinheiro</span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="pagamento" value="pix">
+                                <span><i class="fas fa-qrcode"></i> PIX</span>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="pagamento" value="cartao">
+                                <span><i class="fas fa-credit-card"></i> Cartão na Entrega</span>
+                            </label>
+                        </div>
+
+                        <div class="form-group" id="trocoGroup" style="display: none;">
+                            <label>Troco para quanto?</label>
+                            <input type="number" id="troco" placeholder="0,00" step="0.01">
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h2><i class="fas fa-comment"></i> Observações Gerais</h2>
+                        <div class="form-group">
+                            <textarea id="observacoesGerais" placeholder="Alguma observação adicional sobre o pedido?"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-summary">
+                    <div class="summary-card">
+                        <h3><i class="fas fa-receipt"></i> Resumo do Pedido</h3>
+                        
+                        <div class="order-items" id="orderItems">
+                            <!-- Itens serão carregados aqui -->
+                        </div>
+                        
+                        <div class="order-total">
+                            <div class="total-line">
+                                <span>Subtotal:</span>
+                                <span>R$ <span id="subtotal">0,00</span></span>
+                            </div>
+                            <div class="total-line">
+                                <span>Taxa de Entrega:</span>
+                                <span>R$ 3,00</span>
+                            </div>
+                            <div class="total-line total-final">
+                                <span><strong>Total:</strong></span>
+                                <span><strong>R$ <span id="totalFinal">0,00</span></strong></span>
+                            </div>
+                        </div>
+                        
+                        <button class="finalize-btn" onclick="finalizarPedido()">
+                            <i class="fas fa-whatsapp"></i>
+                            Enviar Pedido via WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

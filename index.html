@@ -1,38 +1,186 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sabor da Casa - Cardápio</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabor da Casa - Delivery</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>🍽️ Sabor da Casa</h1>
-      <p>Cardápio do Dia</p>
-    </header>
-
-    <main>
-      <div id="cardapio" class="cardapio"></div>
-
-      <button id="btnFinalizarPedido" class="btn-primary" style="display:none; margin-top: 15px;">
-        Finalizar Pedido 🛒
-      </button>
-    </main>
-  </div>
-
-  <!-- Carrinho Flutuante -->
-  <div id="carrinhoFlutuante" style="position: fixed; bottom: 20px; right: 20px; width: 320px; max-height: 400px; overflow-y: auto; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); padding: 15px; display:none; z-index: 999;">
-    <h3>Carrinho</h3>
-    <div id="itensCarrinho"></div>
-    <hr />
-    <div>
-      <strong>Total: R$ <span id="totalCarrinho">0,00</span></strong>
+    <div class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-utensils"></i>
+                <h1>Sabor da Casa</h1>
+            </div>
+            <div class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
     </div>
-    <button id="btnFecharCarrinho" class="btn-secondary" style="margin-top:10px;">Fechar</button>
-  </div>
 
-  <script src="script.js"></script>
+    <div class="main-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="menu-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-fire"></i> Cardápio do Dia</h2>
+                        <p>Marmitas fresquinhas preparadas com carinho</p>
+                    </div>
+                    
+                    <div class="cardapio-grid" id="cardapioGrid">
+                        <!-- Cardápio será carregado aqui -->
+                    </div>
+
+                    <div class="section-header">
+                        <h2><i class="fas fa-wine-bottle"></i> Bebidas</h2>
+                    </div>
+                    
+                    <div class="bebidas-grid">
+                        <div class="bebida-card" onclick="adicionarBebida('Coca-Cola 2L', 15.00)">
+                            <div class="bebida-info">
+                                <h3>Coca-Cola 2L</h3>
+                                <p class="bebida-price">R$ 15,00</p>
+                            </div>
+                            <button class="add-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                        
+                        <div class="bebida-card" onclick="adicionarBebida('Coca-Cola 600ml', 10.00)">
+                            <div class="bebida-info">
+                                <h3>Coca-Cola 600ml</h3>
+                                <p class="bebida-price">R$ 10,00</p>
+                            </div>
+                            <button class="add-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                        
+                        <div class="bebida-card" onclick="adicionarBebida('Coca-Cola Lata', 6.00)">
+                            <div class="bebida-info">
+                                <h3>Coca-Cola Lata</h3>
+                                <p class="bebida-price">R$ 6,00</p>
+                            </div>
+                            <button class="add-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                        
+                        <div class="bebida-card" onclick="adicionarBebida('Guaraná 2L', 15.00)">
+                            <div class="bebida-info">
+                                <h3>Guaraná 2L</h3>
+                                <p class="bebida-price">R$ 15,00</p>
+                            </div>
+                            <button class="add-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                        
+                        <div class="bebida-card" onclick="adicionarBebida('Guaraná 600ml', 10.00)">
+                            <div class="bebida-info">
+                                <h3>Guaraná 600ml</h3>
+                                <p class="bebida-price">R$ 10,00</p>
+                            </div>
+                            <button class="add-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                        
+                        <div class="bebida-card" onclick="adicionarBebida('Guaraná Lata', 6.00)">
+                            <div class="bebida-info">
+                                <h3>Guaraná Lata</h3>
+                                <p class="bebida-price">R$ 6,00</p>
+                            </div>
+                            <button class="add-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carrinho Lateral -->
+                <div class="cart-sidebar" id="cartSidebar">
+                    <div class="cart-header">
+                        <h3><i class="fas fa-shopping-cart"></i> Seu Pedido</h3>
+                        <button class="close-cart" onclick="toggleCart()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="cart-items" id="cartItems">
+                        <div class="empty-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            <p>Seu carrinho está vazio</p>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-footer" id="cartFooter" style="display: none;">
+                        <div class="cart-total">
+                            <strong>Total: R$ <span id="cartTotal">0,00</span></strong>
+                        </div>
+                        <button class="checkout-btn" onclick="irParaCheckout()">
+                            Finalizar Pedido <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Marmita -->
+    <div class="modal-overlay" id="marmitaModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle"></h3>
+                <button class="close-modal" onclick="fecharModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <p id="modalDescription"></p>
+                
+                <div class="size-selection">
+                    <h4>Escolha o tamanho:</h4>
+                    <div class="size-options">
+                        <label class="size-option">
+                            <input type="radio" name="tamanho" value="media" checked>
+                            <span class="size-info">
+                                <strong>Média</strong>
+                                <span class="size-price">R$ 17,00</span>
+                            </span>
+                        </label>
+                        <label class="size-option">
+                            <input type="radio" name="tamanho" value="grande">
+                            <span class="size-info">
+                                <strong>Grande</strong>
+                                <span class="size-price">R$ 19,00</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="remove-items">
+                    <h4>Remover ingredientes:</h4>
+                    <div class="ingredients-list" id="ingredientsList">
+                        <!-- Ingredientes serão carregados aqui -->
+                    </div>
+                </div>
+
+                <div class="quantity-section">
+                    <h4>Quantidade:</h4>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="alterarQuantidade(-1)">-</button>
+                        <span id="quantidadeModal">1</span>
+                        <button type="button" onclick="alterarQuantidade(1)">+</button>
+                    </div>
+                </div>
+
+                <div class="observations">
+                    <h4>Observações:</h4>
+                    <textarea id="observacoesMarmita" placeholder="Alguma observação especial?"></textarea>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="add-to-cart-btn" onclick="adicionarAoCarrinho()">
+                    Adicionar ao Carrinho - R$ <span id="precoModal">17,00</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
