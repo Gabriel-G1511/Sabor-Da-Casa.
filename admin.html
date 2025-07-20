@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sabor da Casa - Administração</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔐 Administração - Sabor da Casa</h1>
+    </header>
+
+    <main>
+      <div id="loginForm" class="login-form">
+        <h3>Login Administrativo</h3>
+        <div class="form-group">
+          <label>Senha:</label>
+          <input type="password" id="senhaAdmin" placeholder="Digite a senha" />
+        </div>
+        <button id="btnEntrarAdmin" class="btn-primary">Entrar</button>
+        <div id="erroLogin" class="erro" style="display: none;">Senha incorreta!</div>
+      </div>
+
+      <div id="adminPanel" class="admin-panel" style="display: none;">
+        <h3>Gerenciar Cardápio do Dia</h3>
+
+        <div class="cardapio-admin">
+          <h4>Cadastrar Nova Marmita</h4>
+          <div class="form-group">
+            <label>Nome da Marmita:</label>
+            <input type="text" id="nomeMarmita" placeholder="Ex: Frango Grelhado com Legumes" />
+          </div>
+          <div class="form-group">
+            <label>Descrição:</label>
+            <textarea id="descricaoMarmita" placeholder="Descreva os ingredientes e acompanhamentos..."></textarea>
+          </div>
+          <div class="precos-group">
+            <div class="form-group">
+              <label>Preço Média (R$):</label>
+              <input type="number" id="precoMedia" step="0.01" placeholder="0.00" />
+            </div>
+            <div class="form-group">
+              <label>Preço Grande (R$):</label>
+              <input type="number" id="precoGrande" step="0.01" placeholder="0.00" />
+            </div>
+          </div>
+          <button id="btnAdicionarMarmita" class="btn-primary">Adicionar ao Cardápio</button>
+        </div>
+
+        <div class="cardapio-atual">
+          <h4>Cardápio Atual</h4>
+          <div id="listaCardapio"></div>
+        </div>
+
+        <button id="btnSairAdmin" class="btn-secondary" style="margin-top: 15px;">Sair</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

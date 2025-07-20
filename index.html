@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sabor da Casa - Cardápio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🍽️ Sabor da Casa</h1>
+      <p>Cardápio do Dia</p>
+    </header>
+
+    <main>
+      <div id="cardapio" class="cardapio"></div>
+
+      <button id="btnFinalizarPedido" class="btn-primary" style="display:none; margin-top: 15px;">
+        Finalizar Pedido 🛒
+      </button>
+    </main>
+  </div>
+
+  <!-- Carrinho Flutuante -->
+  <div id="carrinhoFlutuante" style="position: fixed; bottom: 20px; right: 20px; width: 320px; max-height: 400px; overflow-y: auto; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); padding: 15px; display:none; z-index: 999;">
+    <h3>Carrinho</h3>
+    <div id="itensCarrinho"></div>
+    <hr />
+    <div>
+      <strong>Total: R$ <span id="totalCarrinho">0,00</span></strong>
+    </div>
+    <button id="btnFecharCarrinho" class="btn-secondary" style="margin-top:10px;">Fechar</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
